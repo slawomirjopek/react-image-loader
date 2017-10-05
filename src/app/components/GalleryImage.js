@@ -1,4 +1,5 @@
 import React from "react";
+import ImageLoader from "../utils/ImageLoader";
 
 const style = {
     width: "100px",
@@ -8,7 +9,9 @@ const style = {
 const GalleryImage = (props) => (
     <div>
         <h2>{props.title}</h2>
-        <img src={props.src} style={style}/>
+        <ImageLoader src={props.src}>
+            {((src) => <img src={src} style={style}/>)}
+        </ImageLoader>
         <p>{props.author}</p>
     </div>
 );
