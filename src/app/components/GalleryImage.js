@@ -9,9 +9,7 @@ const style = {
 const GalleryImage = (props) => (
     <div>
         <h2>{props.title}</h2>
-        <ImageLoader src={props.src}>
-            {((src) => <img src={src} style={style}/>)}
-        </ImageLoader>
+        <ImageLoader src={props.src} style={style}/>
         <p>{props.author}</p>
     </div>
 );

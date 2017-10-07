@@ -14,27 +14,46 @@ class ImageLoader extends Component {
 
     render() {
         return (
-            <div>TBA</div>
+            <div>
+                { this.state.loaded && <img src={this.props.src} style={this.props.style}/> }
+            </div>
         )
     }
 
     componentDidMount() {
-        this.attachEvents();
+        this.load();
     }
 
     componentWillUnmount() {
         this.detachEvent();
     }
 
-    load() {}
+    load() {
+        this.image = new Image();
+        this.attachEvents();
+        this.setState({ loading: true });
+        this.image.src = this.props.src;
+    }
 
-    attachEvents() {}
+    attachEvents() {
+        this.image.onload = this.loadHandler.bind(this);
+        this.image.onerror = this.errorHandler.bind(this);
+    }
 
-    detachEvent() {}
+    detachEvent() {
+        this.image.onload = null;
+        this.image.onerror = null;
+    }
 
-    loadHandler() {}
+    loadHandler(e) {
+        this.setState({ loading: false, loaded: true });
+        console.log(e);
+    }
 
-    errorHandler() {}
+    errorHandler(e) {
+        this.setState({ loading: false, error: true });
+        console.log(e);
+    }
 }
 
 ImageLoader.propTypes = {
